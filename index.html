@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="华北电力大学（保定）2015级 计算机系 Go语言学习中">
+  <meta name="author" content="空气404">
+  <meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验">
+  <title>kongqi404</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>kongqi404</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2019/03/02/GoLand%E6%B3%A8%E5%86%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%94%B6%E9%9B%86%20--%E6%BF%80%E6%B4%BB/">
+        <p class="h4 index-header">GoLand注册服务器收集 --激活</p>
+      </a>
+
+      <a href="/2019/03/02/GoLand%E6%B3%A8%E5%86%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%94%B6%E9%9B%86%20--%E6%BF%80%E6%B4%BB/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">GoLand注册服务器收集 –激活http://idea.youbbs.org插件推荐
+Afterglow Theme这是一个主题插件，它基于sublime text的Afterglow主题，替代了侧边栏的文件图标和侧边栏的背景颜色，它是对Darcular主题的扩展。
+Auto-Align通过在项目中配置.ignore文件，可以在项目提交时，忽略目录下的部分文件，如数据库密码的配置文件等。Goland的.ignore插件适用.gitignore，hgignore，npmignore，.dockerignore，.chefignore，.cvsignore，。bzrignore等文件的编辑。两个</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/goland/">goland</a>&nbsp;
+          
+            <a href="/tags/go/">go</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2019/03/02/kotlin/">
+        <p class="h4 index-header">Kotlin初学笔记(一)</p>
+      </a>
+
+      <a href="/2019/03/02/kotlin/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Kotlin 
+
+
+    2018年9月的时候一个巧合短暂的接触到了kotlin语言,觉得很棒,我便学习了一段时间,但是后来还是全面投入golang开发了,今天整理文件的时候发现了这些笔记,想着还是分享到博客上来吧.东西不多初学者可以看看,也是我短暂的学习中的一点收获吧.
+
+Glide解析base64图片 //pictureBase64 = &quot;data:image/jpeg;base64,&quot; + base64
+ //base64为picture的base64编码
+ Glide.with(holder.imageView).load(pictureBase64).into(</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Kotlin/">Kotlin</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2019/03/02/ubuntu%E6%8A%98%E8%85%BE%E4%B9%8B%E8%B7%AF/">
+        <p class="h4 index-header">Ubuntu 18.04折腾之路</p>
+      </a>
+
+      <a href="/2019/03/02/ubuntu%E6%8A%98%E8%85%BE%E4%B9%8B%E8%B7%AF/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">#Ubuntu 18.04折腾之路
+更改系统时间（win10+Ubuntu双系统）以下两种方法均可
+
+Ubuntu终端输入
+timedatectl set-local-rtc 1 --adjust-system-clock
+win10  cmd输入
+Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v  RealTimeIsUniversal /t REG_DWORD /d 1    Mac 主题桌面效果:
+
+
+
+
+参考一个大神的视频:https://www.bilibili.com/video/av23152</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Ubuntu/">Ubuntu</a>&nbsp;
+          
+            <a href="/tags/linux/">linux</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2019/03/02/%E4%B8%80%E4%B8%AA%E5%BC%B9%E7%AA%97/">
+        <p class="h4 index-header">Kotlin初学笔记(二)--一个带编辑框弹窗的实现</p>
+      </a>
+
+      <a href="/2019/03/02/%E4%B8%80%E4%B8%AA%E5%BC%B9%E7%AA%97/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">弹窗封装如图所示
+class PopupsWindow : DialogFragment() {
+    //editText加id才能保证屏幕旋转时用户输入的文字不丢失
+    private val ID_EDITTEXT = 0
+    private var title: String? = null
+    private var message: String? = null
+    private var defaultText: String? = null
+    private lateinit var negativeButtonText: String
+    priv</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Kotlin/">Kotlin</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2019/03/02/%E6%8B%8D%E7%85%A7&&%E8%AF%BB%E5%8F%96%E7%9B%B8%E5%86%8C/">
+        <p class="h4 index-header">Kotlin初学笔记(三)--调用相机拍照&amp;&amp;调取图库</p>
+      </a>
+
+      <a href="/2019/03/02/%E6%8B%8D%E7%85%A7&&%E8%AF%BB%E5%8F%96%E7%9B%B8%E5%86%8C/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">权限&lt;!-- 往SDCard写入数据权限 --&gt;
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+&lt;!-- 请求访问使用照相设备 --&gt;
+&lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;
+调取相机private fun takePhoto() {
+        val intentToTakePhoto = Intent(Medi</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Kotlin/">Kotlin</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2019/03/02/%E7%AE%80%E5%8D%95%E7%9A%84framment/">
+        <p class="h4 index-header">Kotlin初学笔记(四)--一个简单的framment实现</p>
+      </a>
+
+      <a href="/2019/03/02/%E7%AE%80%E5%8D%95%E7%9A%84framment/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">简单的framment
+interface IconEditFragmentDelegate {
+    fun choosePicture()
+}
+
+class IconEditFragment: DialogFragment(){
+    var delegate: IconEditFragmentDelegate? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        conte</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Kotlin/">Kotlin</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2019/03/02/%E9%95%BF%E6%8C%89%E5%BC%B9%E5%87%BA%E6%B0%94%E6%B3%A1/">
+        <p class="h4 index-header">Kotlin初学笔记(五)--长按弹出气泡菜单</p>
+      </a>
+
+      <a href="/2019/03/02/%E9%95%BF%E6%8C%89%E5%BC%B9%E5%87%BA%E6%B0%94%E6%B3%A1/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">长按弹出气泡interface PopupMenuListener {
+    fun onPopupMenuClick(position: Int)
+}
+
+class TipMenu (val context: Context) {
+
+    private val DEFAULT_NORMAL_TEXT_COLOR = Color.WHITE
+    private val DEFAULT_PRESSED_TEXT_COLOR = Color.WHITE
+    private val DEFAULT_TEXT_SIZE_DP = 14f
+    private val DEFAULT_T</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-02&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Kotlin/">Kotlin</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2018/05/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">
+        <p class="h4 index-header">如何科学上网</p>
+      </a>
+
+      <a href="/2018/05/21/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">   随着时间的推移网络长城越来越来完善，想要科学上网不再像是之前一样下载几个免费的软件就行的，笔者作为准程序员经常需要在网上查阅资料但是限于某度的结果实在是不如人意，最新的技术资料都在外面，所以科学上网自然必不可少。  正好同学推荐碰到vultr有充值十美元赠25美元的活动，果断入手。想要购买其他的服务器也可以看大家自己喜好啦。接下来就是配置啦。配置时候在网上翻阅了几十个链接也没有系统的写搭建过程的，所以我就把我半天的折腾写啥来了。
+购买服务器
+这个看自己财力和喜好啦，自行购买。
+服务器端配置
+首先安装一个连接服务器端的软件  Putty
+sudo apt-get install putty</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2018-05-21&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E7%BF%BB%E5%A2%99/">翻墙</a>&nbsp;
+          
+            <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">科学上网</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2017/09/04/Go%20%E8%AF%AD%E8%A8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+        <p class="h4 index-header">Go 语言异常处理</p>
+      </a>
+
+      <a href="/2017/09/04/Go%20%E8%AF%AD%E8%A8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">“ Go语言追求简洁优雅，所以，Go语言不支持传统的 try…catch…finally 这种异常，因为Go语言的设计者们认为，将异常与控制结构混在一起会很容易使得代码变得混乱。因为开发者很容易滥用异常，甚至一个小小的错误都抛出一个异常。在Go语言中，使用多值返回来返回错误。不要用异常代替错误，更不要用来控制流程。在极个别的情况下，也就是说，遇到真正的异常的情况下（比如除数为0了）。才使用Go中引入的Exception处理：defer, panic, recover。”
+这几个异常的使用场景可以这么简单描述：Go中可以抛出一个panic的异常，然后在defer中通过recover捕获这个异常，</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2017-09-04&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Go/">Go</a>&nbsp;
+          
+            <a href="/tags/Painc/">Painc</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/2017/08/27/hexo%20+github%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+        <p class="h4 index-header">用hexo搭建自己的博客</p>
+      </a>
+
+      <a href="/2017/08/27/hexo%20+github%20%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1"> 
+
+
+## 准备工作
+- 下载node.js并安装（官网下载安装），默认会安装npm。
+- 下载安装git（官网下载安装） 
+- 下载安装hexo。方法：打开cmd 运行npm install -g hexo（要翻墙）
+
+本地搭建hexo博客
+新建一个文件夹，如MyBlog
+进入该文件夹内，右击运行git，输入：hexo init（生成hexo模板，可能要翻墙）
+生成完模板，运行npm install（目前貌似不用运行这一步）
+最后运行：hexo server （运行程序，访问本地localhost:4000可以看到博客已经搭建成功）
+
+将博客与自己Github关联
+在Github上创建名字</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2017-08-27&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Hexo/">Hexo</a>&nbsp;
+          
+            <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "此人就似空气&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
