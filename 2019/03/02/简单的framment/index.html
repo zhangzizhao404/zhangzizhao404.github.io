@@ -276,6 +276,39 @@ override fun choosePicture() {
             </div>
 
               
+                <!-- Comments -->
+                <div class="comments" id="comments">
+                  
+                  
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.11.1/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var oldLoad = window.onload;
+    window.onload = function () {
+      var gitalk = new Gitalk({
+        clientID: '6b09be72b05704eece5e',
+        clientSecret: '10c7ef1abcb5ea36b9ff8622d0a82f593091f419',
+        repo: 'zhangzizhao404.github.io',
+        owner: 'zhangzizhao404',
+        admin: '['zzz']',
+        id: md5(decodeURI(window.location.pathname)),
+        language: 'zh-CN',
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: 'true',
+        distractionFreeMode: 'false'
+      });
+
+      gitalk.render('gitalk-container')
+      oldLoad && oldLoad();
+    }
+  </script>
+
+
+                </div>
+            
           </div>
         </div>
       </div>
