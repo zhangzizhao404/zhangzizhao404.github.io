@@ -133,7 +133,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    185 字
+                    2.6k 字
                   </span>
                 
 
@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      1 分钟
+                      11 分钟
                   </span>
                 
 
@@ -169,8 +169,7 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>#Ubuntu 18.04折腾之路</p>
-<h3 id="更改系统时间（win10-Ubuntu双系统）"><a href="#更改系统时间（win10-Ubuntu双系统）" class="headerlink" title="更改系统时间（win10+Ubuntu双系统）"></a>更改系统时间（win10+Ubuntu双系统）</h3><p>以下两种方法均可</p>
+              <h3 id="更改系统时间（win10-Ubuntu双系统）"><a href="#更改系统时间（win10-Ubuntu双系统）" class="headerlink" title="更改系统时间（win10+Ubuntu双系统）"></a>更改系统时间（win10+Ubuntu双系统）</h3><p>以下两种方法均可</p>
 <ul>
 <li><p>Ubuntu终端输入</p>
 <pre><code>timedatectl set-local-rtc 1 --adjust-system-clock</code></pre></li>
@@ -183,6 +182,252 @@
 <p>参考一个大神的视频:<a href="https://www.bilibili.com/video/av23152537" target="_blank" rel="noopener">https://www.bilibili.com/video/av23152537</a></p>
 <h3 id="在恢复模式下修改文件"><a href="#在恢复模式下修改文件" class="headerlink" title="在恢复模式下修改文件"></a>在恢复模式下修改文件</h3><p>我在一天之内改文件改的Ubuntu不能解锁进入桌面,于是又探索了一下<br>首先进入恢复模式之后是不能修改文件的,要先输入以下命令</p>
 <pre><code>mount -o remount,rw /</code></pre><p>这样就可以修改文件了,把你之前修改的文件改回原来的.按住Ctrl+Alt+delete就能重启了进入系统了.</p>
+<h2 id="设置软件开机启动"><a href="#设置软件开机启动" class="headerlink" title="设置软件开机启动"></a>设置软件开机启动</h2><p>ubuntu18.04不再使用initd管理系统，改用systemd。</p>
+<p>使用systemd设置开机启动,为了像以前一样，在/etc/rc.local中设置开机启动程序，需要以下几步：</p>
+<p><strong>systemd默认读取/etc/systemd/system下的配置文件，该目录下的文件会链接/lib/systemd/system/下的文件。一般系统安装完/lib/systemd/system/下会有rc-local.service文件，即我们需要的配置文件链接过来：</strong></p>
+<pre><code class="shell">ln -fs /lib/systemd/system/rc-local.service /etc/systemd/system/rc-local.service
+cd /etc/systemd/system/
+cat rc-local.service</code></pre>
+<p>rc-local.service内容</p>
+<pre><code class="shell">#  SPDX-License-Identifier: LGPL-2.1+
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+# This unit gets pulled automatically into multi-user.target by
+# systemd-rc-local-generator if /etc/rc.local is executable.
+[Unit]
+Description=/etc/rc.local Compatibility
+Documentation=man:systemd-rc-local-generator(8)
+ConditionFileIsExecutable=/etc/rc.local
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+RemainAfterExit=yes
+GuessMainPID=no
+1) [Unit] 区块：启动顺序与依赖关系。 </code></pre>
+<ol>
+<li><p>[Unit] 区块：启动顺序与依赖关系。 </p>
+</li>
+<li><p>[Service] 区块：启动行为,如何启动，启动类型。 </p>
+</li>
+</ol>
+<p><strong>创建/etc/rc.local文件</strong></p>
+<pre><code class="shell">touch /etc/rc.local</code></pre>
+<p><strong>赋可执行权限</strong></p>
+<pre><code class="shell">chmod 755 /etc/rc.local</code></pre>
+<p><strong>编辑rc.local，添加需要开机启动的任务</strong></p>
+<pre><code class="shell">#!/bin/bash
+
+echo &quot;test rc &quot; &gt; /var/test.log</code></pre>
+<p><strong>执行reboot重启系统，然后查看test.log</strong></p>
+<h2 id="安装wine-企业微信，-qq等"><a href="#安装wine-企业微信，-qq等" class="headerlink" title="安装wine    企业微信， qq等"></a>安装wine    企业微信， qq等</h2><p><a href="https://laravel-china.org/articles/17517" target="_blank" rel="noopener">https://laravel-china.org/articles/17517</a></p>
+<h2 id="设置mac主题"><a href="#设置mac主题" class="headerlink" title="设置mac主题"></a>设置mac主题</h2><p>安装gnome-tweaks  扩展有bylr，net speed等</p>
+<p>主题：<a href="https://www.gnome-look.org/p/1241688/" target="_blank" rel="noopener">https://www.gnome-look.org/p/1241688/</a>       /etc/share/themes</p>
+<p>图标：<a href="https://github.com/vbay/CSDN-CODE/tree/master/Ubuntu18.04-tutorials-themes/icons" target="_blank" rel="noopener">https://github.com/vbay/CSDN-CODE/tree/master/Ubuntu18.04-tutorials-themes/icons</a>  ~/.icons</p>
+<p>锁屏及壁纸：<a href="https://www.opendesktop.org/p/1207015" target="_blank" rel="noopener">https://www.opendesktop.org/p/1207015</a>  脚本存放目录：/.local/share/nautilus/scripts</p>
+<p>dock栏：dash-to-dock</p>
+<h2 id="ubuntu下载器"><a href="#ubuntu下载器" class="headerlink" title="ubuntu下载器"></a>ubuntu下载器</h2><p>安装uget、aria2</p>
+<pre><code class="shell">sudo add-apt-repository ppa:plushuang-tw/uget-stable
+sudo apt-get update
+sudo apt-get install uget
+sudo add-apt-repository ppa:t-tujikawa/ppa
+sudo apt-get update
+sudo apt-get install aria2</code></pre>
+<p>安装 uget-integrator</p>
+<pre><code class="shell">sudo add-apt-repository ppa:uget-team/ppa
+sudo apt update
+sudo apt install uget-integrator</code></pre>
+<p>安装chrome插件：uget-chrome-wrapper</p>
+<pre><code class="shell">sudo add-apt-repository ppa:slgobinath/uget-chrome-wrapper
+sudo apt update
+sudo apt install uget-chrome-wrapper</code></pre>
+<h2 id="终端切换su失败显示认证失败"><a href="#终端切换su失败显示认证失败" class="headerlink" title="终端切换su失败显示认证失败"></a>终端切换su失败显示认证失败</h2><pre><code class="shell">sudo passwd 
+Password: &lt;--- 输入安装时那个用户的密码 
+Enter new UNIX password: &lt;--- 新的Root用户密码 
+Retype new UNIX password: &lt;--- 重复新的Root用户密码 
+passwd：已成功更新密码 </code></pre>
+<h2 id="给应用程序添加图标"><a href="#给应用程序添加图标" class="headerlink" title="给应用程序添加图标"></a>给应用程序添加图标</h2><p>比如给Postman添加快捷访问方式</p>
+<pre><code class="shell">sudo ln -s /opt/Postman/Postman /usr/bin/postman
+cat &gt; ~/.local/share/applications/postman.desktop &lt;&lt;EOL</code></pre>
+<p>输入以下代码</p>
+<pre><code class="shell">[Desktop Entry]
+Encoding=UTF-8
+Name=Postman
+Exec=/opt/Postman/postman           //注意目录 
+Icon=/opt/Postman/app/resources/app/assets/icon.png  //为图标目录  此为默认安装目录
+Terminal=false
+Type=Application
+Categories=Development;
+EOL</code></pre>
+<p>然后进入~/.local/share/applications/目录把postman.desktop文件赋予可执行权限</p>
+<h2 id="终端美化"><a href="#终端美化" class="headerlink" title="终端美化"></a>终端美化</h2><p>首先安装 <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH" target="_blank" rel="noopener">zsh</a></p>
+<pre><code class="shell">Ubuntu
+sudo apt install zsh</code></pre>
+<p>安装<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="noopener">oh-my-zsh</a></p>
+<pre><code class="shell">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</code></pre>
+<p>查看当前系统的终端有哪些</p>
+<pre><code class="shell">cat /etc/shells</code></pre>
+<p>查看当前终端</p>
+<pre><code class="shell">echo $SHELL</code></pre>
+<p>如果不是zsh 应该切换为zsh</p>
+<pre><code class="shell">postmanchsh -s `which zsh`
+reboot  //重启电脑生效</code></pre>
+<p>更改主题</p>
+<pre><code class="shell">vim ~/.zshrc</code></pre>
+<p>主题推荐：ys、angoster注：运行 sudo update-grub 可能会导致之前手动删除的引导再次出现彻底删除需要进入/etc/grub.d/寻找想要删除的引导所在的文件注释掉即可</p>
+<p>一些主题：<a href="https://www.zhihu.com/question/33277508" target="_blank" rel="noopener">zsh-themes</a></p>
+<p>查看当前安装的主题cd /usr/share/fonts/truetype/</p>
+<pre><code class="shell">ls ~/.oh-my-zsh/themes</code></pre>
+<p>注：安装完后可能会存在一些快捷命令无法使用，那是因为之前是在<del>/.bashrc里面设置了相关参数（比如PATH）应该讲</del>/.bashrc里面做的修改  同样修改到~/.zshrc 中新建一个终端就完事儿了！</p>
+<p>修改agnoster主题</p>
+<p>主题目录：</p>
+<pre><code class="shell">~/.oh-my-zsh/themes</code></pre>
+<p>去掉前缀</p>
+<pre><code class="shell">prompt_context() {
+  if [[ &quot;$USER&quot; != &quot;$DEFAULT_USER&quot; || -n &quot;$SSH_CLIENT&quot; ]]; then
+    prompt_segment black default &quot;%(!.%{%F{yellow}%}.)$USER@%m&quot;   //将此行注释掉 #
+  fi
+}</code></pre>
+<h2 id="vscode使用zsh-agnoster"><a href="#vscode使用zsh-agnoster" class="headerlink" title="vscode使用zsh agnoster"></a>vscode使用zsh agnoster</h2><pre><code class="shell">cd /usr/share/fonts/truetype/
+sudo git clone https://github.com/abertsch/Menlo-for-Powerline.git
+sudo fc-cache -f -v   //刷新字体</code></pre>
+<p>Vs Code的用户设置.json中加入代码：</p>
+<pre><code>&quot;terminal.integrated.fontFamily&quot;: &quot;Menlo for Powerline&quot;</code></pre><h2 id="全局搜索工具albert"><a href="#全局搜索工具albert" class="headerlink" title="全局搜索工具albert:"></a>全局搜索工具albert:</h2><pre><code class="shell">sudo add-apt-repository ppa:noobslab/macbuntu
+sudo apt-get update
+sudo apt-get install albert</code></pre>
+<p>官网有解决无公钥的方法：</p>
+<p><a href="https://albertlauncher.github.io/docs/installing/" target="_blank" rel="noopener">https://albertlauncher.github.io/docs/installing/</a></p>
+<h2 id="搜狗输入法安装"><a href="#搜狗输入法安装" class="headerlink" title="搜狗输入法安装"></a>搜狗输入法安装</h2><p><a href="https://www.jianshu.com/p/c936a8a2180e" target="_blank" rel="noopener">https://www.jianshu.com/p/c936a8a2180e</a><br>输入法设置<br>fcitx-config-gtk3</p>
+<h2 id="无法获得锁的问题"><a href="#无法获得锁的问题" class="headerlink" title="无法获得锁的问题"></a>无法获得锁的问题</h2><p>E: 无法获得锁 /var/lib/dpkg/lock – open (11: 资源临时不可用)</p>
+<p>E: 无法对管理目录(/var/lib/dpkg/)加锁</p>
+<pre><code class="shell">//其中一条
+
+sudo rm /var/lib/apt/lists/lock
+
+sudo rm /var/lib/dpkg/lock</code></pre>
+<p>E: 无法获得锁 /var/cache/apt/archives/lock – open (11 资源临时不可用)</p>
+<p>E: 无法锁定下载目录</p>
+<pre><code class="shell">sudo rm /var/cache/apt/archives/lock 
+sudo rm /var/lib/dpkg/lock</code></pre>
+<h2 id="没有release文件"><a href="#没有release文件" class="headerlink" title="没有release文件"></a>没有release文件</h2><p><a href="https://www.cnblogs.com/BlogOfMr-Leo/p/8512136.html" target="_blank" rel="noopener">https://www.cnblogs.com/BlogOfMr-Leo/p/8512136.html</a></p>
+<pre><code class="shell">cd etc/apt/sources.list.d/</code></pre>
+<p>对应的.list  .list.save 中的bionic 改为xenial</p>
+<h2 id="安装Google-chrome"><a href="#安装Google-chrome" class="headerlink" title="安装Google chrome"></a>安装Google chrome</h2><pre><code class="shell">wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+
+sudo apt-get -f install</code></pre>
+<h2 id="shadowsocks-安装（elementary-无法使用ss-qt5）"><a href="#shadowsocks-安装（elementary-无法使用ss-qt5）" class="headerlink" title="shadowsocks 安装（elementary 无法使用ss-qt5）"></a>shadowsocks 安装（elementary 无法使用ss-qt5）</h2><p>规则列表<a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt" target="_blank" rel="noopener">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
+<pre><code class="shell">sudo pip install shadowsocks
+sslocal -c xxx.json</code></pre>
+<p><strong>!出现问题后：</strong><br>用vim打开文件：(该路径请根据自己的系统情况自行修改，如果不知道该文件在哪里的话，可以使用find命令查找文件位置)</p>
+<pre><code class="shell">vim /usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py </code></pre>
+<p>ubuntu18.04的位置在</p>
+<pre><code class="shell">~/.local/lib/python2.7/site-packages/shadowsocks/crypto/openssl.py</code></pre>
+<p><strong>搜索cleanup</strong></p>
+<p>将libcrypto.EVP_CIPHER_CTX_cleanup.argtypes = (c_void_p,)<br>改为libcrypto.EVP_CIPHER_CTX_reset.argtypes = (c_void_p,)</p>
+<p><strong>再次搜索cleanup</strong></p>
+<p>将libcrypto.EVP_CIPHER_CTX_cleanup(self._ctx)<br>改为libcrypto.EVP_CIPHER_CTX_reset(self._ctx)<br>保存并退出<br>启动shadowsocks服务：service shadowsocks start 或 sslocal -c ss配置文件目录</p>
+<h2 id="设置文件夹为英文"><a href="#设置文件夹为英文" class="headerlink" title="设置文件夹为英文"></a>设置文件夹为英文</h2><pre><code class="shell">export LANG=en_US
+xdg-user-dirs-gtk-update
+
+//重启
+reboot
+//弹出提示框,点击取消,即可</code></pre>
+<h2 id="查看进程、强制杀死进程"><a href="#查看进程、强制杀死进程" class="headerlink" title="查看进程、强制杀死进程"></a>查看进程、强制杀死进程</h2><pre><code class="shell">ps -aux
+sudo kill -s 9 xxx(进程号)</code></pre>
+<h2 id="18-04安装网易云"><a href="#18-04安装网易云" class="headerlink" title="18.04安装网易云"></a>18.04安装网易云</h2><p>官网下载安装包  安装</p>
+<p>图标不能打开</p>
+<pre><code class="shell"># 找到 netease-cloud-music.desktop 文件
+# 默认为  /usr/share/applications/netease-cloud-music.desktop
+dpkg -L netease-cloud-music|grep desktop                   
+
+# 对应行修改为 Exec=sh -c &quot;unset SESSION_MANAGER &amp;&amp; netease-cloud-music %U&quot;
+sudo vi /usr/share/applications/netease-cloud-music.desktop</code></pre>
+<p>将Exec 那行改成</p>
+<pre><code class="shell">Exec=sh -c &quot;unset SESSION_MANAGER &amp;&amp; netease-cloud-music %U&quot;</code></pre>
+<p>！！！操作前请确保无网易云进程</p>
+<pre><code class="shell">ps -aux|grep netease</code></pre>
+<h2 id="解决-linux下编译-sh文件报错-“-XXXX-unexpected-operator”-问题"><a href="#解决-linux下编译-sh文件报错-“-XXXX-unexpected-operator”-问题" class="headerlink" title="解决 linux下编译.sh文件报错 “[: XXXX: unexpected operator” 问题"></a>解决 linux下编译.sh文件报错 “[: XXXX: unexpected operator” 问题</h2><p>后来发现，因为ubuntu默认的sh是连接到dash的,又因为dash跟bash的不兼容所以出错了.执行时可以把sh换成bash文件名.sh来执行.成功.dash是什么东西,查了一下,应该也是一种shell,貌似用户对它的诟病颇多。</p>
+<p>修改sh默认连接到bash的一种方法:</p>
+<pre><code class="shell">sudo dpkg-reconfigure dash
+</code></pre>
+<p>选择no 即可!</p>
+<p>或者编译文件时不要不用./运行  使用bash 文件名运行</p>
+<pre><code class="shell">./xxx.sh   //rong
+bash xxx.sh //right</code></pre>
+<h2 id="cat、tail、head、grep、sed查看文件任意几行的数据"><a href="#cat、tail、head、grep、sed查看文件任意几行的数据" class="headerlink" title="cat、tail、head、grep、sed查看文件任意几行的数据"></a>cat、tail、head、grep、sed查看文件任意几行的数据</h2><pre><code class="shell"># 显示file文件里匹配foo字串那行以及上下5行
+grep -C 5 foo file 
+# 显示foo及前5行
+grep -B 5 foo file 
+# 显示foo及后5行
+grep -A 5 foo file 
+# grep结果太多， 可否只取前面10行匹配的结果
+grep ...... | head -10
+# 查看最后1000行的数据
+cat filename | tail -n 1000
+# 查看1000到3000行的数据
+cat filename | head -n 3000 | tail -n +1000
+# 打印文件所有内容
+cat filename 
+# 打印文件最后1000行的数据
+tail filename -n 1000 
+# 打印文件第1000行开始以后的内容
+tail filename -n +1000 
+# 打印前1000的内容
+head filename -n 1000  
+</code></pre>
+<h2 id="隐藏dash-to-dock"><a href="#隐藏dash-to-dock" class="headerlink" title="隐藏dash-to-dock"></a>隐藏dash-to-dock</h2><pre><code class="shell">// 如果想要恢复  改为true即可
+gsettings set org.gnome.shell.extensions.dash-to-dock autohide false
+gsettings set org.gnome.shell     .extensions.dash-to-dock dock-fixed false
+gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false    </code></pre>
+<h3 id="修复Ubuntu-grub引导"><a href="#修复Ubuntu-grub引导" class="headerlink" title="修复Ubuntu grub引导"></a>修复Ubuntu grub引导</h3><p>在win10的基础上安装了ubuntu16.04，但是后来重新安装了win10，导致ubuntu的引导消失。最终用<strong>U盘启动盘</strong>进行修复，解决了这个问题</p>
+<ol>
+<li><p>制作一个U盘启动盘。下载对应的ubuntu系统，用UltraISO制作Ubuntu U盘启动。</p>
+</li>
+<li><p>打开电脑后选择u盘启动盘，然后选择try ubuntu without install。试用不安装。</p>
+</li>
+<li><p>进入ubuntu系统后，连接好网络，打开终端，输入下面命令，按照提示操作。</p>
+</li>
+</ol>
+<pre><code class="shell"># 可能会出现无法apt-get update 的现象  
+# 需要去Ubuntu软件更新 更改一下源 默认是main-sever 需要注：运行 sudo update-grub 可能会导致之前手动删除的引导再次出现彻底删除需要进入/etc/grub.d/寻找想要删除的引导所在的文件注释掉即可更改成国内的源 比如aliyun
+sudo add-apt-repository ppa:yannubuntu/boot-repair &amp;&amp; sudo apt-get update</code></pre>
+<ol start="4">
+<li>完成后，终端中输入下面命令：</li>
+</ol>
+<pre><code class="shell">sudo apt-get install -y boot-repair &amp;&amp; boot-repair  </code></pre>
+<ol start="5">
+<li>选择 <strong>recommended</strong> <strong>repair</strong>就行了 根据提示多等几分钟就ok了</li>
+</ol>
+<p>参考：<a href="https://blog.csdn.net/laocaibcc229/article/details/79274412" target="_blank" rel="noopener">https://blog.csdn.net/laocaibcc229/article/details/79274412</a></p>
+<h2 id="删除grub多余的引导"><a href="#删除grub多余的引导" class="headerlink" title="删除grub多余的引导"></a>删除grub多余的引导</h2><pre><code class="shell">cd /boot/grub
+sudo vim grub.cfg
+#里面每一个menuentry 就是一个引导  删除即可</code></pre>
+<p><strong>注：运行 sudo update-grub 可能会导致之前手动删除的引导再次出现彻底删除需要进入/etc/grub.d/寻找想要删除的引导所在的文件注释掉即可</strong></p>
+<h2 id="设置grub主题"><a href="#设置grub主题" class="headerlink" title="设置grub主题"></a>设置grub主题</h2><p>参考：<a href="https://tianyijian.github.io/2018/04/05/ubuntu-grub-beautify/" target="_blank" rel="noopener">https://tianyijian.github.io/2018/04/05/ubuntu-grub-beautify/</a></p>
+<p>几个不错的主题（下载完成后解压进入主题目录运行install.sh文件就好）</p>
+<p><strong>Vimix</strong>：<a href="https://www.gnome-look.org/p/1009236/" target="_blank" rel="noopener">https://www.gnome-look.org/p/1009236/</a></p>
+<p><strong>Griffin</strong>：<a href="https://www.gnome-look.org/p/1237117/" target="_blank" rel="noopener">https://www.gnome-look.org/p/1237117/</a></p>
+<p><strong>Primitivistical</strong>：<a href="https://www.gnome-look.org/p/1280604/" target="_blank" rel="noopener">https://www.gnome-look.org/p/1280604/</a>    </p>
+<pre><code class="shell">cd /etc/grub.d
+sudo vim 00_header
+# 添加下面这条命令(记得更换主题名字)
+GRUB_THEME=/boot/grub/themes/themeName/theme.txt
+
+sudo update-grub</code></pre>
+<p>更改grub背景颜色：</p>
+<pre><code class="shell">sudo vim  /usr/share/plymouth/themes/default.grub
+#黑色：0,0,0,0
+sudo update-grub</code></pre>
 
             </div>
             <hr>
@@ -207,16 +452,16 @@
                 <div class="post-prevnext row">
                   <div class="post-prev col-12 col-md-6">
                     
-                      <a href="/2019/03/02/kotlin/">
+                      <a href="/2019/04/02/linux%E8%BE%BE%E4%BA%BA%E5%85%BB%E6%88%90/">
                         <i class="fa fa-chevron-left"></i>
-                        <span>Kotlin初学笔记(一)</span>
+                        <span>Linux常用命令</span>
                       </a>
                     
                   </div>
                   <div class="post-next col-12 col-md-6">
                     
-                      <a href="/2019/03/02/%E4%B8%80%E4%B8%AA%E5%BC%B9%E7%AA%97/">
-                        <span>Kotlin初学笔记(二)--一个带编辑框弹窗的实现</span>
+                      <a href="/2017/09/04/Go%20%E8%AF%AD%E8%A8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+                        <span>Go 语言异常处理</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
                     

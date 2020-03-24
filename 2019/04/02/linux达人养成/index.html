@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="zair">
   <meta name="keywords" content="">
-  <title>Kotlin初学笔记(二)--一个带编辑框弹窗的实现 - zair</title>
+  <title>Linux常用命令 - zair</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -124,7 +124,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期六, 三月 2日 2019, 12:00 凌晨
+                  星期二, 四月 2日 2019, 12:00 凌晨
                 </p>
               
 
@@ -133,7 +133,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    854 字
+                    1.5k 字
                   </span>
                 
 
@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      4 分钟
+                      6 分钟
                   </span>
                 
 
@@ -169,258 +169,194 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <h3 id="弹窗封装"><a href="#弹窗封装" class="headerlink" title="弹窗封装"></a>弹窗封装</h3><p>如图所示</p>
-<pre><code class="kotlin">class PopupsWindow : DialogFragment() {
-    //editText加id才能保证屏幕旋转时用户输入的文字不丢失
-    private val ID_EDITTEXT = 0
-    private var title: String? = null
-    private var message: String? = null
-    private var defaultText: String? = null
-    private lateinit var negativeButtonText: String
-    private lateinit var positiveButtonText: String
-    private lateinit var negativeButtonOnClickListener: View.OnClickListener
-    private lateinit var positiveButtonOnClickListener: View.OnClickListener
-    private lateinit var negativeButton: Button
-    private lateinit var positiveButton: Button
-    lateinit var editText: EditText
-    lateinit var errorTextView: TextView
-    private lateinit var messageText: TextView
+              <h4 id="软硬链接："><a href="#软硬链接：" class="headerlink" title="软硬链接："></a>软硬链接：</h4><p>硬链接：i节点相同， 实际是同一个文件，删除其中一个不影响两外一个，不能跨分区，不能针对目录使用</p>
+<pre><code class="shell">ln xxx aaa    </code></pre>
+<p>软连接：删除链接不影响源文件，删除原文件不能通过链接访问文件，类似于win快捷方式，</p>
+<p><strong>做软连接 源文件地址必须是绝对路径，不写绝对路径默认是别的的是软连接所在目录</strong></p>
+<pre><code class="shell">ln -s xxx aaa</code></pre>
+<h4 id="搜索命令"><a href="#搜索命令" class="headerlink" title="搜索命令"></a>搜索命令</h4><p><strong>locate</strong></p>
+<pre><code class="shell">locate //只能搜索文件名
+find //资源耗费比较多</code></pre>
+<p>locate 搜索</p>
+<p>数据库(位置（ubuntu）：/var/lib/mlocate不同的系统名字数据库不一样)</p>
+<pre><code class="shell">sudo updatedb //更新数据库</code></pre>
+<p>搜索规则配置文件：</p>
+<pre><code class="shell">/etc/updatedb.conf</code></pre>
+<p><strong>whereis</strong></p>
+<p>搜索系统命令位置、及其帮助文档</p>
+<pre><code class="shell">-b 命令位置
+-m 帮助文档的位置</code></pre>
+<p><strong>which</strong></p>
+<p>搜索系统命令位置、及其别名</p>
+<p><strong>find</strong></p>
+<p>搜索文件  【范围】 【搜索条件】</p>
+<p>使用通配符进行模糊搜索</p>
+<pre><code class="shell">*  匹配所有内容
+? 匹配人一个字符
+[] 匹配扩号内任意一个字符
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val bundle = arguments
-        title = bundle!!.getString(&quot;title&quot;)
-        message = bundle.getString(&quot;message&quot;)
-        defaultText = bundle.getString(&quot;defaultText&quot;)
-    }
+-iname 不区分大小写
+-user xx 按所有者搜索
+-nouser 查找没有所有者的文件（内核文件，外来文件否则就是垃圾文件）
+-mtime +10 +10 查找十天前修改的文件 -10 十天内... 10 十天当天...
+-actime 文件访问时间  -ctime 改变文件属性 -mtime 修改文件内容
+-size 25k  查找大小是25k的文件， 单位：k小写 M大写，不写默认为数据块
+-inum 262422 查找i节点是xxx的文件
+-a 逻辑与
+-o 逻辑或
+-exec ...进行对应操作 {} \；</code></pre>
+<p><strong>grep</strong></p>
+<p>使用正则表达式匹配</p>
+<h4 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h4><p><strong>man</strong></p>
+<p>man xxx(命令) 获取命令的帮助选项</p>
+<pre><code class="shell">man -f  xxx命令 可以查看等级      相当于wharis 
+man -k xxx  帮助文档中含有xxx 关键字的命令的帮助文档</code></pre>
+<p>xxx –<strong>help</strong></p>
+<p>含中文</p>
+<p><strong>help</strong></p>
+<p>shell 内部命令</p>
+<p><strong>info</strong></p>
+<p>一个巨大的帮助文档，不常用</p>
+<pre><code class="shell">-u  -n -p -q</code></pre>
+<p>压缩解压缩命令</p>
+<p>.zip .gz .bz2 .tar.gz .tar.bz2</p>
+<p><strong>zip    upzip</strong> </p>
+<p>压缩完不一定比压缩前小</p>
+<pre><code class="shell">zip xxx zzz 可不带扩展名，但最好带上方便阅读zzz-&gt;xxx
+zip -r xxx  zzz 压缩文件夹</code></pre>
+<p><strong>gzip</strong></p>
+<pre><code class="shell">gzip xxx 源文件会消失
+gzip -c xxx &gt; zzz 不消失
+gzip -r xxx 压缩文件夹中的子目录
+gzip -d
+gunzip xxx 解压缩
+gunzip -r 目录</code></pre>
+<p><strong>bzip2</strong></p>
+<p>不能压缩目录</p>
+<pre><code class="shell">bzip -k 保留原文件</code></pre>
+<p><strong>tar</strong></p>
+<p>打包命令</p>
+<pre><code class="shell">-c: 打包
+-v：显示过程
+-f: 指定打包后的文件名
+-x: 解打包命令
+-z: 压缩为.tar.gz
+-j: 压缩为.tar.bz2
+-c：压缩
+-x: 解压缩
+-t: 测试  只查看不解压</code></pre>
+<h4 id="关机重启命令"><a href="#关机重启命令" class="headerlink" title="关机重启命令"></a>关机重启命令</h4><p><strong>shutdown</strong></p>
+<p>命令比较安全</p>
+<pre><code class="shell">-c
+-h
+-r</code></pre>
+<p>其他关机命令</p>
+<pre><code class="shell">//不安全
+halt 
+poweroff
+init 0
+init 6 重启</code></pre>
+<p><strong>runlevel</strong></p>
+<p>查看当前系统运行级别</p>
+<pre><code class="shell">cat /etc/inittab 级别说明</code></pre>
+<p><strong>logout</strong></p>
+<p>正确断开连接</p>
+<h4 id="挂载命令"><a href="#挂载命令" class="headerlink" title="挂载命令"></a>挂载命令</h4><p><strong>mount</strong></p>
+<p>查看当前挂载的分区</p>
+<pre><code class="shell">/etc/fstab 开机自动自动挂载程序命令文件
+-a 依据上面文件自动挂载
+-t 文件系统 iso9600（光盘）ext3 ext4
+-o 特殊操作 可google</code></pre>
+<p>挂载光盘：</p>
+<pre><code class="shell">mkdir /mnt/cdrom
+#-t 可省略
+mount -t iso9660 /dev/sro /mnt/cdrom </code></pre>
+<p>卸载：</p>
+<pre><code class="shell">umount 设备文件名 or 挂载点</code></pre>
+<p>挂载优盘：</p>
+<pre><code class="shell">fdisk -l 查看当前的设备
+# vfat指的是fat32 
+# Linux不支持NTFS  Linux 可装ntfs -3g  读ntfs分区不可写 
+# sdb1是设备名字  不确定需根据第一条命令判断
+mount -t vfat /dev/sdb1 /mnt/usb/</code></pre>
+<h4 id="用户登录查看"><a href="#用户登录查看" class="headerlink" title="用户登录查看"></a>用户登录查看</h4><p><strong>w</strong></p>
+<pre><code class="shell">w
+16:19:26 up  6:23,  1 user,  load average: 3.39, 3.74, 3.98
+USER     TTY      来自           LOGIN@   IDLE   JCPU   PCPU WHAT
+kongqi   :0       :0               10:01   ?xdm?   2:25m  0.00s /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu gnome-session --session=ubuntu</code></pre>
+<p><strong>who</strong></p>
+<pre><code class="shell">who
+kongqi   :0           2019-03-28 10:01 (:0)</code></pre>
+<p><strong>last</strong> </p>
+<p>查看的是/var/log/wtmp文件</p>
+<p>历史登录用户信息、系统重启时间</p>
+<p><strong>lastlog</strong></p>
+<p>查看的是/var/log/lastlog文件</p>
+<p>所有用户的历史登录信息</p>
+<p><strong>其他</strong></p>
+<p><strong>echo</strong></p>
+<pre><code class="shell">#支持反斜杠调整的输出格式\t \n \b...  十六进制  颜色输出  
+echo -e </code></pre>
+<h4 id="shell概述"><a href="#shell概述" class="headerlink" title="shell概述"></a>shell概述</h4><p><strong>alias</strong></p>
+<p>别名优先级高于系统命令</p>
+<pre><code class="shell">#临时设定
+alias 别名= 原名
+unalias
+#永久生效
+修改~/.bashrc文件</code></pre>
+<p><strong>history</strong></p>
+<p>默认保存一千条，/etc/profile可修改条数</p>
+<pre><code class="shell">-c: 清空历史命令
+-w: 将内存中的历史命令写入文件中~/.bash_history
 
-    override fun onStart(){
-        super.onStart()
-        val dialog = dialog
-        if (dialog != null &amp;&amp; dialog.window != null){
-            val window = dialog.window
-            window!!.setLayout(dip(250), wrapContent)
-            window.setGravity(Gravity.CENTER)
-            window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            //设置点击屏幕外弹窗不消失
-            this.isCancelable = false
-        }
-    }
+!n
+!!
+!字符串 调用最后一个以字符串开头的命令</code></pre>
+<p><strong>输出重定向</strong></p>
+<pre><code class="shell">#标准输出 有空格
+命令 &gt; 文件  以覆盖的方式
+命令 &gt;&gt; 文件 以添加的方式
+#报错信息 无空格
+2&gt;文件    
+2&gt;&gt; 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
-        context?.let {
-            return with(it) {
-                verticalLayout {
-                    background = newGradientDrawable(-0x1, dip(1), -0x1, dip(10))
-                    background.alpha = 225
-                    textView(title) {
-                        textColor = -0x1000000
-                        textSize = 18f
-                        gravity = Gravity.START or Gravity.CENTER_VERTICAL
-                        singleLine = true
-                    }.lparams(width = wrapContent, height = wrapContent) {
-                        gravity = Gravity.CENTER_HORIZONTAL or Gravity.TOP
-                        topMargin = dip(10)
-                    }
+#不用区分错误还是正确
+命令 &gt; 文件 2&gt;&amp;1
+命令 &gt;&gt; 文件 2&gt;&amp;1
+#不用区分错误还是正确
+命令 &amp;&gt; 文件 2&gt;&amp;1
+命令 &amp;&gt;&gt; 文件 2&gt;&amp;1
+#错误日志进文件2 正确日志文件1
+命令 &gt;&gt; 文件1 2&gt;&gt;文件2
+#/dev/null 相当于垃圾站 输出的东西被丢弃
+命令 &amp;&gt;/dev/null</code></pre>
+<p><strong>输入重定向</strong></p>
+<p><strong>wc</strong></p>
+<pre><code class="shell">-c:  字节数
+-w： 单词数
+-l： 行数
+&lt; 输入 &lt;可省略</code></pre>
+<p><strong>多命令顺序执行</strong></p>
+<pre><code class="shell">A ; B ; C 链接  多命令顺序执行 B 出现错误后不影响C执行
+A &amp;&amp; B A正确执行后才执行B
+A || B A不正确执行就执行B
 
-                    if (message != &quot;&quot;){
-                        messageText = textView(message) {
-                            textSize = 13f
-                            textColor = -0x8a8a8b
-                            gravity = Gravity.CENTER
-                        }.lparams(width = matchParent, height = wrapContent){
-                            topMargin = dip(10)
-                            marginEnd = dip(17)
-                            marginStart = dip(17)
-                        }
-                    }
+eg：
+ls &amp;&amp; echo yes || echo no</code></pre>
+<p><strong>文件格式化一些例子</strong></p>
+<pre><code class="shell">#将文件a和b中相同的行去重， -r降序排列   -k1 第一列排序 -u 相同的只保留一份
+cat a.txt b.txt | sort -r -k1,1 -u &gt;&gt; xxx.txt </code></pre>
+<p><strong>利用jq 格式化json字符串</strong></p>
+<pre><code class="shell">#将./aaa.txt 中的json id和nick字段并放到xxx.txt
+# {xxx;xxx;xxx} &gt;&gt; xxx   {}内为组操作
+{printf &quot;%10s &quot; &quot;ID&quot;; printf &quot;%20s\n&quot; &quot;NICK&quot; }&gt;&gt; xxx.txt; while read line; do
+ID=$(echo &quot;$line&quot; | jq &quot;.data.id&quot;);
+NICK=$(echo &quot;$line&quot; | jq -r &quot;.data.nick&quot;);
+{printf &quot;%10s &quot; &quot;$ID&quot;; printf &quot;%20s\n&quot; &quot;$NICK&quot;} &gt;&gt; xxx.txt;
+done &lt; ./aaa.txt</code></pre>
+<p><strong>curl 请求</strong></p>
+<pre><code class="shell">curl -X POST -d &#39;{&quot;mid&quot;:19758655}&#39; https://wkop-api.xiaoniangao.cn/student/info &gt;&gt; output.txt</code></pre>
 
-                    editText = editText {
-                        id = ID_EDITTEXT
-                        setText(defaultText)
-                        textColor = -0x1000000
-                        textSize = 16f
-                        gravity = Gravity.START or Gravity.CENTER_VERTICAL
-                        singleLine = true
-                        inputType = EditorInfo.TYPE_TEXT_VARIATION_URI
-                        imeOptions = EditorInfo.IME_ACTION_GO or EditorInfo.IME_FLAG_NO_EXTRACT_UI or EditorInfo.IME_FLAG_NO_FULLSCREEN or EditorInfo.IME_FLAG_NO_PERSONALIZED_LEARNING
-                        singleLine = true
-                        isFocusableInTouchMode = true
-                        setPaddingRelative(dip(5), dip(2), dip(5), dip(2))
-                        background = newGradientDrawable(-0x1, dip(1), -0x1, dip(0))
-                        addTextChangedListener(object :TextWatcher{
-                            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-
-                            override fun afterTextChanged(p0: Editable?) { }
-
-                            //editText文字改变时的操作
-                            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                                if (errorTextView.isShown){
-                                    background = newGradientDrawable(-0x1, dip(1), -0x1, dip(0))
-                                    errorTextView.text = null
-                                }
-                            }
-                        })
-                    }.lparams(width = matchParent, height = wrapContent) {
-                        gravity = Gravity.CENTER_HORIZONTAL
-                        topMargin = dip(10)
-                        marginEnd = dip(15)
-                        marginStart = dip(15)
-                    }
-
-                    errorTextView = textView {
-                        textColor = -0x10000
-                        textSize = 10f
-                        gravity = Gravity.END or Gravity.CENTER_VERTICAL
-                    }.lparams(width = wrapContent, height = dip(15)){
-                        marginEnd = dip(15)
-                        gravity = Gravity.END
-                    }
-
-                    view { backgroundColor = -0x1f1f20 }.lparams(width = matchParent, height = 1)
-
-                    linearLayout {
-                        negativeButton = button(negativeButtonText) {
-                            textSize = 16f
-                            textColor = -0xff8901
-                            background.alpha = 0
-                            setOnClickListener(negativeButtonOnClickListener)
-                        }.lparams(width = wrapContent, height = matchParent) {
-                            weight = 1f
-                        }
-
-                        view { backgroundColor = -0x1f1f20}.lparams(width = 1, height = matchParent)
-
-                        positiveButton = button(positiveButtonText) {
-                            textSize = 16f
-                            textColor = -0xff8901
-                            background.alpha = 0
-                            setOnClickListener(positiveButtonOnClickListener)
-                        }.lparams(width = wrapContent, height = matchParent) {
-                            weight = 1f
-                        }
-                    }.lparams(width = matchParent, height = dip(45)) {
-                        gravity = Gravity.BOTTOM
-                    }
-                }
-            }
-        }
-        return null
-    }
-
-    fun setCancelButton(buttonText: String, listener: View.OnClickListener){
-        this.negativeButtonText = buttonText
-        this.negativeButtonOnClickListener = listener
-    }
-
-    fun setConfirmButton(buttonText: String, listener: View.OnClickListener){
-        this.positiveButtonText = buttonText
-        this.positiveButtonOnClickListener = listener
-    }
-
-    //文本框内容不满足限制条件时，提示出错信息
-    fun setEditTextError(error : CharSequence){
-        editText.background = newGradientDrawable(-0x1, dip(1), -0x10000, dip(0))
-        errorTextView.text = error
-    }
-
-    fun isEditTextChange(): Boolean{
-        return editText.text.toString() != defaultText
-    }
-
-    private fun newGradientDrawable(
-        @ColorInt color: Int, stroke: Int, @ColorInt strokeColor: Int,
-        cornors: Int
-    ): GradientDrawable {
-        val drawable = GradientDrawable()
-        drawable.setColor(color)
-        drawable.setStroke(stroke, strokeColor)
-        drawable.cornerRadius = cornors.toFloat()
-        return drawable
-    }
-}</code></pre>
-<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><pre><code class="kotlin">class CommonPopupsWindow(){
-    private lateinit var title:String
-    private lateinit var message: String
-    private lateinit var defaultText: String
-    private lateinit var editPopupsWindow: PopupsWindow
-    constructor(title: String, message: String, defaultText: String, activity:Activity) : this() {
-        this.title = title
-        this.message = message
-        this.defaultText = defaultText
-        this.activity = activity
-        editPopupsWindow = PopupsWindow()
-        val bundle = Bundle()
-        bundle.putString(&quot;title&quot;, title)
-        bundle.putString(&quot;message&quot;, message)
-        bundle.putString(&quot;defaultText&quot;, defaultText)
-        editPopupsWindow.arguments = bundle
-        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
-    }
-
-    fun setButton(buttonText: String, listener: View.OnClickListener){
-        if (buttonText == &quot;取消&quot;){
-            editPopupsWindow.setCancelButton(buttonText, View.OnClickListener {
-                close()
-            })
-        }else{
-            editPopupsWindow.setConfirmButton(buttonText, listener)
-        }
-    }
-
-    fun getEditedText(): String{
-        return editPopupsWindow.editText.text.toString()
-    }
-
-    fun close(){
-        editPopupsWindow.dismiss()
-        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-    }
-
-    fun show(fragmentManager: FragmentManager){
-        editPopupsWindow.let {
-            fragmentManager.beginTransaction().add(editPopupsWindow, &quot;iconUriEdit&quot;).commitAllowingStateLoss()
-        }
-    }
-
-    fun isEditTextChanged(): Boolean{
-        return editPopupsWindow.isEditTextChange()
-    }
-
-    fun setEditTextError(error: CharSequence){
-        editPopupsWindow.setEditTextError(error)
-    }
-}</code></pre>
-<h4 id="注：其中的newGradientDrawable（）函数用来设置背景颜色、边框颜色、边框大小以及文本框圆角大小"><a href="#注：其中的newGradientDrawable（）函数用来设置背景颜色、边框颜色、边框大小以及文本框圆角大小" class="headerlink" title="注：其中的newGradientDrawable（）函数用来设置背景颜色、边框颜色、边框大小以及文本框圆角大小"></a>注：其中的newGradientDrawable（）函数用来设置背景颜色、边框颜色、边框大小以及文本框圆角大小</h4><pre><code class="kotlin">private fun newGradientDrawable(
-        @ColorInt color: Int, stroke: Int, @ColorInt strokeColor: Int,
-        cornors: Int
-    ): GradientDrawable {
-        val drawable = GradientDrawable()
-        drawable.setColor(color)
-        drawable.setStroke(stroke, strokeColor)
-        drawable.cornerRadius = cornors.toFloat()
-        return drawable
-    }</code></pre>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><pre><code class="kotlin">button(&quot;弹窗&quot;){
-    setOnClickListener{
-        val colorSetPopupWindow = CommonPopupsWindow(&quot;标题标题&quot;,&quot;message message
-                                                      message message message message
-                                                      &quot;, &quot;文本框默认内容&quot;)
-         colorSetPopupWindow.addButton(&quot;取消&quot;, View.OnClickListener { })
-         colorSetPopupWindow.addButton(&quot;确定&quot;, View.OnClickListener {
-                  //TODO 点击确定后所进行的操作
-        })
-         colorSetPopupWindow.show(supportFragmentManager)
-     }
-}.lparams(width = wrapContent, height = wrapContent){
-      topMargin = dip(100)
-      gravity  = Gravity.CENTER_HORIZONTAL
-}</code></pre>
-<p>效果图:</p>
-<div align=center> 
-<img src="https://github.com/zhangzizhao404/markdown-pictures/blob/master/MyBlog/Kotlin/002/001.png?raw=true" srcset="/img/loading.gif" style="zoom:25%" alt = "弹窗" />
-<img src="https://github.com/zhangzizhao404/markdown-pictures/blob/master/MyBlog/Kotlin/002/002.png?raw=true" srcset="/img/loading.gif" style="zoom:25%" alt = "弹窗输入内容不符合规定" />
-</div>
             </div>
             <hr>
             <div>
@@ -430,7 +366,9 @@
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Kotlin/">Kotlin</a>
+                      <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
                     
                   </span>
                 
@@ -442,16 +380,11 @@
                 <div class="post-prevnext row">
                   <div class="post-prev col-12 col-md-6">
                     
-                      <a href="/2019/03/02/ubuntu%E6%8A%98%E8%85%BE%E4%B9%8B%E8%B7%AF/">
-                        <i class="fa fa-chevron-left"></i>
-                        <span>Ubuntu 18.04折腾之路</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-12 col-md-6">
                     
-                      <a href="/2019/03/02/%E6%8B%8D%E7%85%A7&&%E8%AF%BB%E5%8F%96%E7%9B%B8%E5%86%8C/">
-                        <span>Kotlin初学笔记(三)--调用相机拍照&amp;&amp;调取图库</span>
+                      <a href="/2019/03/02/ubuntu%E6%8A%98%E8%85%BE%E4%B9%8B%E8%B7%AF/">
+                        <span>Ubuntu 18.04折腾之路</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
                     
@@ -657,7 +590,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Kotlin初学笔记(二)--一个带编辑框弹窗的实现&nbsp;",
+        "Linux常用命令&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
